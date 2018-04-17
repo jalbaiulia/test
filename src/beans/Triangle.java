@@ -1,4 +1,14 @@
-public class Triangle {
+package beans;
+
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+//@Component
+public class Triangle implements Shape
+//        , InitializingBean, DisposableBean
+{
 
     private String type;
     private int height;
@@ -11,6 +21,7 @@ public class Triangle {
     public Point getPointA() {
         return pointA;
     }
+
 
     public void setPointA(Point pointA) {
         this.pointA = pointA;
@@ -40,21 +51,22 @@ public class Triangle {
         return height;
     }
 
+
     public void setHeight(int height) {
         this.height = height;
     }
 
     // constructor injection
-    public Triangle(String type){
+    public Triangle(String type) {
         this.type = type;
     }
 
-    public Triangle(int height){
+    public Triangle(int height) {
         this.height = height;
 
     }
 
-    public Triangle(int height, String type){
+    public Triangle(String type, int height) {
         this.height = height;
         this.type = type;
 
@@ -70,9 +82,31 @@ public class Triangle {
 //        this.type = type;
 //    }
 
-    public void draw(){
+    public void draw() {
 
-        System.out.println("Triangle drawn "+ getType() + " " + getHeight() + " " + pointA + pointB + pointC);
+        System.out.println("Triangle drawn " + getType() + " " + getHeight() + " " + pointA + pointB + pointC);
     }
+
+
+    //        , InitializingBean, DisposableBean
+
+//    @Override
+//    public void afterPropertiesSet() throws Exception {
+//        System.out.println("After Prop Set");
+//    }
+//
+//    @Override
+//    public void destroy() throws Exception {
+//        System.out.println("Just before destroy triangle bean");
+//    }
+
+    public  void init(){
+        System.out.println("init");
+    }
+
+    public  void delete(){
+        System.out.println("delete");
+    }
+
 
 }
