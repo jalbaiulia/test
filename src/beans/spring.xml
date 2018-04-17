@@ -1,3 +1,5 @@
+<!--spring adnotation config.xml on github-->
+
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -6,7 +8,7 @@
        xmlns:context="http://www.springframework.org/schema/context"
         default-init-method="init" default-destroy-method="delete">
 
-    <!--<context:annotation-config/>-->
+    <context:annotation-config/>
 
     <bean id="triangle" class="beans.Triangle">
 
@@ -34,6 +36,7 @@
     <bean id="pointA" class="beans.Point">
         <property name="x" value="0"></property>
         <property name="y" value="20"></property>
+        <qualifier value="circleCentre"/>
     </bean>
 
     <bean id="pointB" class="beans.Point">
@@ -47,6 +50,39 @@
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="location" value="beans/pointsConfig.properties"></property>
     </bean>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <bean id="circle" class="beans.Circle">
+
+        <!--removed for @Autowired centre property -->
+        <!--<property name="centre" ref="pointZero"></property>-->
+
+    </bean>
+
+    <!--thorws error for missing proberty, see setter marked with @Required in Circle -->
+    <bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor"/>
+
+
+    <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
+
+    <!--<bean id="centre" class="beans.Point">-->
+        <!--<property name="x" value="${pointZero.pointX}"></property>-->
+        <!--<property name="y" value="${pointZero.pointY}"></property>-->
+    <!--</bean>-->
 
 
 </beans>

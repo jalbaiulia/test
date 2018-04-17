@@ -12,8 +12,10 @@ public class DrawingApp {
         context.registerShutdownHook();
 
         Triangle t = (Triangle) context.getBean("triangle");
-
         t.draw();
+
+        Shape c = (Shape) context.getBean("circle");
+        c.draw();
 
     }
 }
