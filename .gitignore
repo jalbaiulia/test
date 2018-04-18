@@ -1,5 +1,6 @@
 *.class
 out/*
 try-spring.iml
-.idea/*
+.idea/workspace.xml
+
 

@@ -1,5 +1,3 @@
-<!--spring adnotation config.xml on github-->
-
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -10,23 +8,23 @@
 
     <context:annotation-config/>
 
-    <bean id="triangle" class="beans.Triangle">
+    <!--<bean id="triangle" class="beans.Triangle">-->
 
 
-        <!--for method injection-->
-        <!--<property name="type" value="Equilateral"/>-->
+        <!--&lt;!&ndash;for method injection&ndash;&gt;-->
+        <!--&lt;!&ndash;<property name="type" value="Equilateral"/>&ndash;&gt;-->
 
-        <!--for constructor injection-->
-        <constructor-arg value="2" index="1"/>
+        <!--&lt;!&ndash;for constructor injection&ndash;&gt;-->
+        <!--<constructor-arg value="2" index="1"/>-->
 
-        <constructor-arg value="Equilateral" index="0" />
+        <!--<constructor-arg value="Equilateral" index="0" />-->
 
-        <property name="pointA" ref="pointZero"></property>
-        <property name="pointB" ref="pointA"></property>
-        <property name="pointC" ref="pointB"></property>
+        <!--<property name="pointA" ref="pointZero"></property>-->
+        <!--<property name="pointB" ref="pointA"></property>-->
+        <!--<property name="pointC" ref="pointB"></property>-->
 
 
-    </bean>
+    <!--</bean>-->
 
     <bean id="pointZero" class="beans.Point">
         <property name="x" value="${pointZero.pointX}"></property>
@@ -44,22 +42,12 @@
         <property name="y" value="0"></property>
     </bean>
 
-    <!--<context:component-scan base-package="beans"></context:component-scan>-->
 
-    <bean class="beans.CustomBeanPostProcessor"></bean>
+    <!--<bean class="beans.CustomBeanPostProcessor"></bean>-->
+
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="location" value="beans/pointsConfig.properties"></property>
     </bean>
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -83,6 +71,12 @@
         <!--<property name="x" value="${pointZero.pointX}"></property>-->
         <!--<property name="y" value="${pointZero.pointY}"></property>-->
     <!--</bean>-->
+
+
+    <!--scan for components-->
+
+    <context:component-scan base-package="beans"></context:component-scan>
+
 
 
 </beans>
