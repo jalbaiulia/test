@@ -1,32 +1,28 @@
-<!--spring adnotation config.xml on github-->
-
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
        xmlns:context="http://www.springframework.org/schema/context"
-        default-init-method="init" default-destroy-method="delete">
+       default-init-method="init" default-destroy-method="delete">
 
     <context:annotation-config/>
 
     <bean id="triangle" class="beans.Triangle">
-
 
         <!--for method injection-->
         <!--<property name="type" value="Equilateral"/>-->
 
         <!--for constructor injection-->
         <constructor-arg value="2" index="1"/>
-
         <constructor-arg value="Equilateral" index="0" />
 
         <property name="pointA" ref="pointZero"></property>
         <property name="pointB" ref="pointA"></property>
         <property name="pointC" ref="pointB"></property>
 
-
     </bean>
+
 
     <bean id="pointZero" class="beans.Point">
         <property name="x" value="${pointZero.pointX}"></property>
@@ -36,33 +32,12 @@
     <bean id="pointA" class="beans.Point">
         <property name="x" value="0"></property>
         <property name="y" value="20"></property>
-        <qualifier value="circleCentre"/>
     </bean>
 
     <bean id="pointB" class="beans.Point">
         <property name="x" value="-20"></property>
         <property name="y" value="0"></property>
     </bean>
-
-    <!--<context:component-scan base-package="beans"></context:component-scan>-->
-
-    <bean class="beans.CustomBeanPostProcessor"></bean>
-    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="location" value="beans/pointsConfig.properties"></property>
-    </bean>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -73,16 +48,45 @@
 
     </bean>
 
-    <!--thorws error for missing proberty, see setter marked with @Required in Circle -->
+
+    <bean class="beans.CustomBeanPostProcessor"></bean>
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="beans/pointsConfig.properties"></property>
+    </bean>
+
+
+    <!--@Autowired first looks for a bean with the same name as the objects (Circle) property (centre)-->
+    <!--<bean id="centre" class="beans.Point">-->
+    <!--<property name="x" value="${pointZero.pointX}"></property>-->
+    <!--<property name="y" value="${pointZero.pointY}"></property>-->
+    <!--</bean>-->
+
+
+    <bean id="pointAutowired" class="beans.Point">
+        <property name="x" value="0"></property>
+        <property name="y" value="20"></property>
+        <qualifier value="circleCentre"/>
+    </bean>
+
+    <!--thorws error for missing property, see setter marked with @Required in Circle -->
     <bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor"/>
 
 
     <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
 
-    <!--<bean id="centre" class="beans.Point">-->
-        <!--<property name="x" value="${pointZero.pointX}"></property>-->
-        <!--<property name="y" value="${pointZero.pointY}"></property>-->
-    <!--</bean>-->
+
+
+    <bean class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basenames">
+            <list>
+                <value>mymessages</value>
+            </list>
+        </property>
+    </bean>
+
+
+    <!--scan for @Components-->
+    <context:component-scan base-package="beans"></context:component-scan>
 
 
 </beans>
