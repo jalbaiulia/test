@@ -1,6 +1,23 @@
+<<<<<<< HEAD
 *.class
 out/*
 try-spring.iml
 .idea/workspace.xml
 
 
+=======
+*.iml
+.idea
+target
+.DS_Store
+dependency-reduced-pom.xml
+.settings
+.project
+.classpath
+ngrok
+ngrok.tgz
+ngrok.zip
+tmp.myenv
+*.log
+out*
+>>>>>>> 6ace4ce... cfix
